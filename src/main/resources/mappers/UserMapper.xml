@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.henryshop_api.user.repository.UserMapper">
+	<resultMap type="UserDto" id="userResultMap">
+		<id column="id" property="id"/>
+		<result column="email" property="email"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="phone" property="phone"/>
+		<result column="created_at" property="createdAt"/>
+		<result column="updated_at" property="updatedAt"/>
+		<collection property="authorities" ofType="string">
+			<result column="authority_id"/>
+		</collection>
+	</resultMap>
+
+	<sql id="userSql">
+		SELECT u.id,
+		       u.email,
+		       u.password,
+		       u.name,
+		       u.phone,
+		       u.created_at,
+		       u.updated_at,
+		       ua.authority_id
+		FROM users u
+		INNER JOIN user_authorities ua
+		ON u.id = ua.user_id
+	</sql>
+
+	<select id="findAllUsers" resultMap="userResultMap">
+		<include refid="userSql" />
+	</select>
+	
+	<select id="findUserById" resultMap="userResultMap">
+		<include refid="userSql" />
+		WHERE u.id = #{id}
+	</select>
+	
+	<insert id="saveUser" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO users(email, password, name, phone)
+		VALUES(#{email}, #{password}, #{name}, #{phone})
+	</insert>
+	
+	<insert id="saveUserAuthority">
+		INSERT INTO user_authorities(user_id) VALUES(#{id})
+	</insert>
+</mapper>
