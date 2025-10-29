@@ -1,13 +1,13 @@
-package com.example.henryshop_api;
+package com.example.nextshop_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HenryshopApiApplication {
+public class NextshopApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HenryshopApiApplication.class, args);
+		SpringApplication.run(NextshopApiApplication.class, args);
 	}
 
 }

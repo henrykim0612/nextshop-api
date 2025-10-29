@@ -1,10 +1,10 @@
-package com.example.henryshop_api;
+package com.example.nextshop_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HenryshopApiApplicationTests {
+class NextshopApiApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: henryshop-api
+    name: nextshop-api
   h2:
     console:
       enabled: true
@@ -8,10 +8,24 @@ spring:
     url: jdbc:h2:mem:testdb
 mybatis:
   mapper-locations: classpath:mappers/*.xml
-  type-aliases-package: com.example.henryshop_api
+  type-aliases-package: com.example.nextshop_api
   configuration:
     map-underscore-to-camel-case: true
     jdbc-type-for-null: NULL
 logging:
   level:
     root: info
+jwt:
+  # The JWT JWA Specification (RFC 7518, Section 3.2) states that keys used with HMAC-SHA algorithms MUST have a size >= 256 bits
+  secret: 7364b0d2de554d3e942b1b8b048345251ce116d2a7274276973bb342f0e55def
+  iss: nextshop.com
+#  sub: myapp-jwt
+  # 1000 * 60(1분) * 60(1시간) * 24(시간) * 7 = 일주일
+  expiration-milliseconds: 604800000
+cookie:
+  jwt:
+    name: jwt_cookie
+    http-only: false
+    secure: false
+    path: /
+    maxAge: 604800 # maxAge는 초 단위

@@ -1,4 +1,4 @@
-package com.example.henryshop_api.user.dto;
+package com.example.nextshop_api.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

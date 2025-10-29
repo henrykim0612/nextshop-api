@@ -1,4 +1,4 @@
-package com.example.henryshop_api.config.exception;
+package com.example.nextshop_api.config.exception;
 
 import java.time.LocalDateTime;
 
