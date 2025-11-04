@@ -1,10 +1,5 @@
 package com.example.nextshop_api.config.security;
 
-import com.example.nextshop_api.config.exception.JwtAccessDeniedHandler;
-import com.example.nextshop_api.config.exception.JwtAuthenticationEntryPoint;
-import com.example.nextshop_api.config.jwt.JwtFilter;
-import com.example.nextshop_api.config.jwt.TokenProvider;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +13,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.example.nextshop_api.config.exception.JwtAccessDeniedHandler;
+import com.example.nextshop_api.config.exception.JwtAuthenticationEntryPoint;
+import com.example.nextshop_api.config.jwt.JwtFilter;
+import com.example.nextshop_api.config.jwt.TokenProvider;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -41,6 +43,7 @@ public class SecurityFilterConfiguration {
             	.requestMatchers("/api/v1/sign-up").permitAll()
                 .requestMatchers("/api/v1/sign-in").permitAll()
                 .requestMatchers("/api/v1/sign-out").permitAll()
+                .requestMatchers("/api/v1/posts/**").permitAll()
                 .anyRequest().authenticated();
         });
 
