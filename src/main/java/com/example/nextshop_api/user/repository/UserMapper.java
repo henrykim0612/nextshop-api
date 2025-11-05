@@ -13,5 +13,6 @@ public interface UserMapper {
 	UserDto findUserByEmail(String email);
 	UserDto findUserById(long id);
 	void saveUser(CreateUserDto createUserDto);
+	void saveVisitRoutes(CreateUserDto createUserDto);
 	void saveUserAuthority(CreateUserDto createUserDto);
 }

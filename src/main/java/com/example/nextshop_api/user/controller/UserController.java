@@ -3,9 +3,6 @@ package com.example.nextshop_api.user.controller;
 import java.net.URI;
 import java.util.Optional;
 
-import com.example.nextshop_api.config.jwt.TokenDto;
-import com.example.nextshop_api.helper.CookieHelper;
-import com.example.nextshop_api.user.dto.SignInDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.nextshop_api.config.jwt.TokenDto;
+import com.example.nextshop_api.helper.CookieHelper;
 import com.example.nextshop_api.user.dto.CreateUserDto;
+import com.example.nextshop_api.user.dto.SignInDto;
 import com.example.nextshop_api.user.dto.UserDto;
 import com.example.nextshop_api.user.service.UserService;
 

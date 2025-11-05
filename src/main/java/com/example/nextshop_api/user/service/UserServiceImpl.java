@@ -3,9 +3,6 @@ package com.example.nextshop_api.user.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.nextshop_api.config.jwt.TokenProvider;
-import com.example.nextshop_api.helper.SecurityHelper;
-import com.example.nextshop_api.user.dto.SignInDto;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,8 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.nextshop_api.config.exception.AlreadyExistedUserException;
 import com.example.nextshop_api.config.exception.UserNotFoundException;
+import com.example.nextshop_api.config.jwt.TokenProvider;
 import com.example.nextshop_api.config.property.ErrorMessagePropertySource;
+import com.example.nextshop_api.helper.SecurityHelper;
 import com.example.nextshop_api.user.dto.CreateUserDto;
+import com.example.nextshop_api.user.dto.SignInDto;
 import com.example.nextshop_api.user.dto.UserDto;
 import com.example.nextshop_api.user.repository.UserMapper;
 
@@ -65,6 +65,9 @@ public class UserServiceImpl implements UserService {
         createUserDto.setPassword(passwordEncoder.encode(createUserDto.getPassword()));
         userMapper.saveUser(createUserDto);
         userMapper.saveUserAuthority(createUserDto);
+        if (createUserDto.getVisitRoutes().size() > 0) {
+        	userMapper.saveVisitRoutes(createUserDto);	
+        }
 	}
 
     @Override

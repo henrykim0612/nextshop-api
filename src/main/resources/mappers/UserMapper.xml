@@ -46,11 +46,19 @@
     </select>
 	
 	<insert id="saveUser" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-		INSERT INTO users(email, password, name, phone)
-		VALUES(#{email}, #{password}, #{name}, #{phone})
+		INSERT INTO users(email, password, name, phone, gender)
+		VALUES(#{email}, #{password}, #{name}, #{phone}, #{gender})
 	</insert>
 	
 	<insert id="saveUserAuthority">
 		INSERT INTO user_authorities(user_id) VALUES(#{id})
+	</insert>
+	
+	<insert id="saveVisitRoutes">
+		INSERT INTO user_visit_routes (user_id, visit_route_id) VALUES
+		<foreach collection="visitRoutes" item="item" separator=",">
+			(#{id}, #{item})
+		</foreach>
+		
 	</insert>
 </mapper>
