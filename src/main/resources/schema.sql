@@ -318,5 +318,4 @@ INSERT INTO posts (id, title, description, image_url, datetime, author_id) VALUE
  'https://images.unsplash.com/photo-1483181957632-8bda974cbc91?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1740',
  '2020-02-12',
  3);
-
  
