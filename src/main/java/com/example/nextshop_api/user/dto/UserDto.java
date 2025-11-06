@@ -17,6 +17,8 @@ public class UserDto {
 	
 	private String name;
 	private String phone;
+	private String gender;
+	private int cartCount;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	private List<String> authorities;

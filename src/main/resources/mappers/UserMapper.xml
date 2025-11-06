@@ -10,6 +10,8 @@
 		<result column="password" property="password"/>
 		<result column="name" property="name"/>
 		<result column="phone" property="phone"/>
+		<result column="gender" property="gender"/>
+		<result column="cart_count" property="cartCount"/>
 		<result column="created_at" property="createdAt"/>
 		<result column="updated_at" property="updatedAt"/>
 		<collection property="authorities" ofType="string">
@@ -23,6 +25,8 @@
 		       u.password,
 		       u.name,
 		       u.phone,
+		       u.gender,
+               (SELECT COUNT(*) FROM carts WHERE user_id = u.id) AS cart_count,
 		       u.created_at,
 		       u.updated_at,
 		       ua.authority_id
