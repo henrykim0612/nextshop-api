@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.nextshop_api.product.repository.ProductMapper">
+	<select id="findProductsByCategory" resultType="ProductDto">
+		SELECT p.id,
+	           p.category_id,
+	           p.name,
+	           p.price,
+	           p.description,
+	           p.features,
+	           p.care,
+	           p.created_at,
+	           p.updated_at,
+	           (
+	                SELECT LISTAGG(color, ',') WITHIN GROUP (ORDER BY color)
+	                FROM (
+	                    SELECT product_id, color
+	                    FROM product_sizes 
+	                    GROUP BY product_id, color
+	                ) t
+	                WHERE product_id = p.id
+               ) AS colors,
+	           (
+		             SELECT image_url 
+		             FROM product_images 
+		             WHERE product_id = p.id 
+		             AND sort_order = 1
+	           ) AS thumbnail_image_url
+		FROM products p		
+		WHERE category_id = #{category}
+		<if test="colors != null or sizes != null">
+			AND EXISTS (
+				SELECT color, size
+				FROM product_sizes
+				WHERE product_id = p.id
+				<if test="colors != null">
+					AND #{colors} REGEXP '(^|,)' || color || '(,|$)'
+				</if>
+				<if test="sizes != null">
+					AND #{sizes} REGEXP '(^|,)' || size || '(,|$)'
+				</if>
+			)	
+		</if>
+		ORDER BY created_at DESC
+	</select>
+	
+	
+	<resultMap type="ProductOverviewDto" id="productOverviewResultMap">
+		<id column="id" property="id"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="description" property="description"/>
+		<result column="features" property="features"/>
+		<result column="care" property="care"/>
+		<result column="review_count" property="reviewCount"/>
+		<result column="review_rating" property="reviewRating"/>
+		<collection property="images" ofType="string">
+			<result column="image_url"/>
+		</collection>
+		<collection property="options" ofType="ProductOptionDto">
+			<result column="color" property="color"/>
+			<collection property="sizes" ofType="ProductSizeDto">
+				<result column="product_size_id" property="id"/>
+				<result column="size" property="size"/>
+				<result column="quantity" property="quantity"/>
+			</collection>
+		</collection>
+		
+	</resultMap>
+	<select id="findProductById" resultMap="productOverviewResultMap">
+		SELECT p.id,
+	           p.category_id,
+	           p.name,
+	           p.price,
+	           p.description,
+	           p.features,
+	           p.care,
+	           ps.id AS product_size_id,
+	           ps.color,
+	           ps.size,
+	           ps.quantity,
+	           (SELECT COUNT(*) FROM reviews WHERE product_id = p.id) AS review_count,
+               (SELECT ROUND(AVG(rating), 1) FROM reviews WHERE product_id = p.id) AS review_rating,
+               pi.image_url
+		FROM products p
+		INNER JOIN product_sizes ps ON p.id = ps.product_id
+        INNER JOIN product_images pi ON p.id = pi.product_id
+		WHERE p.id = #{id}
+	</select>
+</mapper>

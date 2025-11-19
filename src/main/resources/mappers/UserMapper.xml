@@ -26,7 +26,12 @@
 		       u.name,
 		       u.phone,
 		       u.gender,
-               (SELECT COUNT(*) FROM carts WHERE user_id = u.id) AS cart_count,
+               (
+                   SELECT COUNT(*) 
+                   FROM carts c
+                   INNER JOIN cart_items ci ON c.id = ci.cart_id
+                   WHERE c.user_id = u.id
+               ) AS cart_count,
 		       u.created_at,
 		       u.updated_at,
 		       ua.authority_id
@@ -63,6 +68,52 @@
 		<foreach collection="visitRoutes" item="item" separator=",">
 			(#{id}, #{item})
 		</foreach>
-		
 	</insert>
+	
+	<select id="findCartByUserId" resultType="CartDto">
+		SELECT id, user_id, created_at, updated_at FROM carts WHERE user_id = #{userId}
+	</select>
+	
+	<insert id="saveCart" keyColumn="id" keyProperty="cartId" useGeneratedKeys="true">
+		INSERT INTO carts (user_id) VALUES (#{userId}) 
+	</insert>
+	
+	<update id="updateCart">
+		UPDATE carts SET updated_at = CURRENT_TIMESTAMP WHERE id = #{id}		
+	</update>
+	
+	<select id="findCartItemByCartIdAndProductSizeId" resultType="CartItemDto">
+		SELECT id, cart_id, product_size_id, quantity, created_at FROM cart_items WHERE cart_id = #{cartId} and product_size_id = #{productSizeId} 
+	</select>
+	
+	<update id="updateCartItemQuantity">
+		UPDATE cart_items SET quantity = #{quantity} WHERE id = #{id}
+	</update>
+	
+	<insert id="saveCartItem">
+		INSERT INTO cart_items (cart_id, product_size_id, quantity) VALUES (#{cartId}, #{productSizeId}, 1)
+	</insert>
+	
+	<select id="findCartOverviewByUserId" resultType="CartOverviewDto">
+		SELECT ci.id,
+               ci.cart_id,
+               ci.product_size_id,
+               ci.quantity,
+               ci.created_at,
+               p.id AS product_id,
+               p.category_id,
+               p.name AS product_name,
+               p.price,
+               pi.image_url,
+               pi.alt_text,
+			   ps.color,
+               ps.size
+		FROM carts c
+		INNER JOIN cart_items ci ON c.id = ci.cart_id
+		INNER JOIN product_sizes ps ON ps.id = ci.product_size_id
+		INNER JOIN products p ON p.id = ps.product_id
+		INNER JOIN product_images pi ON p.id = pi.product_id
+		WHERE c.user_id = #{userId}
+		AND pi.sort_order = 1
+	</select>
 </mapper>

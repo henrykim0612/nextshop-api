@@ -1,6 +1,7 @@
 package com.example.nextshop_api.user.controller;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.nextshop_api.config.jwt.TokenDto;
 import com.example.nextshop_api.helper.CookieHelper;
+import com.example.nextshop_api.user.dto.CartOverviewDto;
+import com.example.nextshop_api.user.dto.CreateCartDto;
 import com.example.nextshop_api.user.dto.CreateUserDto;
 import com.example.nextshop_api.user.dto.SignInDto;
 import com.example.nextshop_api.user.dto.UserDto;
@@ -63,5 +66,17 @@ public class UserController {
     @GetMapping("/users/me")
     public ResponseEntity<Optional<UserDto>> getLoggedUser() {
         return ResponseEntity.ok(userService.getLoggedUser());
+    }
+        
+    
+    @GetMapping("/cart")
+    public ResponseEntity<List<CartOverviewDto>> getMyCartItems() {
+    	return ResponseEntity.ok(userService.getCartOverview());
+    }
+    
+    @PostMapping("/cart")
+    public ResponseEntity<Void> createCart(@RequestBody CreateCartDto createrCartDto) {
+    	userService.createCart(createrCartDto);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 }

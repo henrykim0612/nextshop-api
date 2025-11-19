@@ -83,7 +83,7 @@ CREATE TABLE products (
 INSERT INTO products (category_id, name, price, description, features, care)
 SELECT c.id,
        CONCAT('WOMEN Product ', SEQ),
-       ROUND(50000 + (RAND() * 50000), 2),
+       ROUND(100 + (RAND() * 100), 2),
        'The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. 
 They are hand cut and sewn locally, with a special dye technique that gives each tee it is own look.
 
@@ -97,7 +97,7 @@ WHERE c.category_name = 'WOMEN';
 INSERT INTO products (category_id, name, price, description, features, care)
 SELECT c.id,
        CONCAT('MEN Product ', SEQ),
-       ROUND(60000 + (RAND() * 60000), 2),
+       ROUND(100 + (RAND() * 100), 2),
        'The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. 
 They are hand cut and sewn locally, with a special dye technique that gives each tee it is own look.
 
@@ -124,17 +124,137 @@ CREATE TABLE product_sizes (
 );
 
 INSERT INTO product_sizes (product_id, color, size, quantity)
-SELECT p.id, c.color, c.size, c.quantity
+SELECT 
+    p.id AS product_id,
+    p.color,
+    s.size,
+    CAST(RAND() * 100 AS INT) AS quantity
 FROM (
-    VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10)
-) AS p(id)
-CROSS JOIN (
     VALUES 
-        ('BLACK', 'S', (RAND() * 100)),
-        ('BLUE',  'M', (RAND() * 100)),
-        ('RED',   'L', (RAND() * 100)),
-        ('GREEN', 'XL', (RAND() * 100))
-) AS c(color, size, quantity);
+        (1, 'BLACK'),
+        (1, 'WHITE'),
+        (1, 'BLUE'),
+        (1, 'RED'),
+        (1, 'GREEN'),
+        
+        (2, 'BLACK'),
+        (2, 'WHITE'),
+        (2, 'BLUE'),
+        (2, 'RED'),
+        (2, 'GREEN'),
+        
+        (3, 'BLACK'),
+        (3, 'WHITE'),
+        (3, 'BLUE'),
+        (3, 'RED'),
+        (3, 'GREEN'),
+        
+        (4, 'BLACK'),
+        (4, 'WHITE'),
+        (4, 'BLUE'),
+        (4, 'RED'),
+        (4, 'GREEN'),
+        
+        (5, 'BLACK'),
+        (5, 'WHITE'),
+        (5, 'BLUE'),
+        (5, 'RED'),
+        (5, 'GREEN'),
+        
+        (6, 'BLACK'),
+        (6, 'WHITE'),
+        (6, 'BLUE'),
+        (6, 'RED'),
+        (6, 'GREEN'),
+        
+        (7, 'BLACK'),
+        (7, 'WHITE'),
+        (7, 'BLUE'),
+        (7, 'RED'),
+        (7, 'GREEN'),
+        
+        (8, 'BLACK'),
+        (8, 'WHITE'),
+        (8, 'BLUE'),
+        (8, 'RED'),
+        (8, 'GREEN'),
+        
+        (9, 'BLACK'),
+        (9, 'WHITE'),
+        (9, 'BLUE'),
+        (9, 'RED'),
+        (9, 'GREEN'),
+        
+        (10, 'BLACK'),
+        (10, 'WHITE'),
+        (10, 'BLUE'),
+        (10, 'RED'),
+        (10, 'GREEN')
+) AS p(id, color)
+CROSS JOIN (
+    VALUES ('S'), ('M'), ('L'), ('XL')
+) AS s(size);
+
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'S' AND color = 'BLACK';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'M' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'L' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'XL' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'XL' AND color = 'GREEN';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'S' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'M' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'L' AND color = 'BLACK';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'XL' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'XL' AND color = 'RED';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'S' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'M' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'L' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'XL' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'XL' AND color = 'BLACK';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 4 AND size = 'S' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 4 AND size = 'M' AND color = 'BLACK';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 4 AND size = 'L' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 4 AND size = 'XL' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 4 AND size = 'XL' AND color = 'BLUE';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 5 AND size = 'S' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 5 AND size = 'M' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 5 AND size = 'L' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 5 AND size = 'XL' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 5 AND size = 'XL' AND color = 'BLACK';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 6 AND size = 'S' AND color = 'BLACK';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 6 AND size = 'M' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 6 AND size = 'L' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 6 AND size = 'XL' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 6 AND size = 'XL' AND color = 'GREEN';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 7 AND size = 'S' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 7 AND size = 'M' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 7 AND size = 'L' AND color = 'BLACK';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 7 AND size = 'XL' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 7 AND size = 'XL' AND color = 'RED';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 8 AND size = 'S' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 8 AND size = 'M' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 8 AND size = 'L' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 8 AND size = 'XL' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 8 AND size = 'XL' AND color = 'BLACK';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 9 AND size = 'S' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 9 AND size = 'M' AND color = 'BLACK';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 9 AND size = 'L' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 9 AND size = 'XL' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 9 AND size = 'XL' AND color = 'BLUE';
+
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 10 AND size = 'S' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 10 AND size = 'M' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 10 AND size = 'L' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 10 AND size = 'XL' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 10 AND size = 'XL' AND color = 'BLACK';
 
 
 CREATE TABLE product_images (
@@ -163,32 +283,25 @@ CREATE TABLE carts (
     user_id BIGINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT uq_carts_user_id UNIQUE (user_id),
     CONSTRAINT fk_cart_user
         FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
 );
 
-INSERT INTO carts (user_id) VALUES (1);
-INSERT INTO carts (user_id) VALUES (1);
-
 CREATE TABLE cart_items (
     id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     cart_id BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
+    product_size_id BIGINT NOT NULL,
     quantity INT NOT NULL CHECK (quantity > 0),
-    price_at_add DECIMAL(12,2) NOT NULL, -- 담을 당시 가격(스냅샷 용도)
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT fk_cart_item_cart
         FOREIGN KEY (cart_id) REFERENCES carts(id)
         ON DELETE CASCADE,
     CONSTRAINT fk_cart_item_product
-        FOREIGN KEY (product_id) REFERENCES products(id),
-    CONSTRAINT uq_cart_product UNIQUE (cart_id, product_id)
+        FOREIGN KEY (product_size_id) REFERENCES product_sizes(id),
+    CONSTRAINT uq_cart_product UNIQUE (cart_id, product_size_id)
 );
-
-INSERT INTO cart_items (cart_id, product_id, quantity, price_at_add) VALUES (1, 1, 2, (SELECT price FROM products WHERE id = 1) * 2);
-INSERT INTO cart_items (cart_id, product_id, quantity, price_at_add) VALUES (1, 6, 3, (SELECT price FROM products WHERE id = 6) * 3);
-INSERT INTO cart_items (cart_id, product_id, quantity, price_at_add) VALUES (2, 7, 1, (SELECT price FROM products WHERE id = 7) * 1);
      
 -- 리뷰 데이터를 많이 만들기 위해 일부로 테이블 관계 해제
 CREATE TABLE reviews (
@@ -245,8 +358,9 @@ SELECT
         END
     ) AS reviewer_name,
 
-    -- rating: 1~5 순환
-    1 + MOD(n.X, 5) AS rating,
+    -- rating: 1~5 무작위
+    CAST(RAND() * 4 AS INT) + 1 AS rating,
+    
 
     -- content: 영어 문장으로 구성된 리뷰
     CONCAT(
