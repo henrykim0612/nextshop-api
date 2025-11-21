@@ -18,4 +18,5 @@ public interface UserService {
     Optional<UserDto> getLoggedUser();
     void createCart(CreateCartDto createCartDto);
     List<CartOverviewDto> getCartOverview();
+    void deleteCartItem(long id);
 }

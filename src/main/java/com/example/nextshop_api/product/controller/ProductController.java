@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.nextshop_api.product.dto.ProductDto;
 import com.example.nextshop_api.product.dto.ProductOverviewDto;
 import com.example.nextshop_api.product.dto.ProductRequestDto;
+import com.example.nextshop_api.product.dto.SimpleProductDto;
 import com.example.nextshop_api.product.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,11 @@ public class ProductController {
             Thread.currentThread().interrupt(); // 인터럽트 상태 복구
         }
         return ResponseEntity.ok(productService.getProduct(id));
+    }
+    
+    @GetMapping("/products/simple")
+    public ResponseEntity<List<SimpleProductDto>> getAllProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
     }
     
 }

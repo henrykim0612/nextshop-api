@@ -142,4 +142,9 @@ public class UserServiceImpl implements UserService {
 			return new ArrayList<>();
 		}
 	}
+
+	@Override
+	public void deleteCartItem(long id) {
+		userMapper.deleteCartItemById(id);	
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.nextshop_api.product.dto.ProductDto;
 import com.example.nextshop_api.product.dto.ProductOverviewDto;
 import com.example.nextshop_api.product.dto.ProductRequestDto;
+import com.example.nextshop_api.product.dto.SimpleProductDto;
 import com.example.nextshop_api.product.repository.ProductMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,10 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ProductOverviewDto getProduct(long id) {
 		return productMapper.findProductById(id);
+	}
+
+	@Override
+	public List<SimpleProductDto> getAllProducts() {
+		return productMapper.findAllProducts();
 	}
 }

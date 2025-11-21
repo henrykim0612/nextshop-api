@@ -91,4 +91,8 @@
         INNER JOIN product_images pi ON p.id = pi.product_id
 		WHERE p.id = #{id}
 	</select>
+	
+	<select id="findAllProducts" resultType="SimpleProductDto">
+		SELECT id, category_id, name FROM products ORDER BY category_id, id
+	</select>
 </mapper>

@@ -45,7 +45,9 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/v1/sign-out").permitAll()
                 .requestMatchers("/api/v1/posts/**").permitAll()
                 .requestMatchers("/api/v1/products/**").permitAll()
-                .requestMatchers("/api/v1/cart").hasRole("USER")
+                .requestMatchers("/api/v1/cart/**").hasRole("USER")
+                .requestMatchers("/api/v1/users/**").hasRole("USER")
+                .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
         });
 

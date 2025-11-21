@@ -28,4 +28,5 @@ public interface UserMapper {
 	void updateCartItemQuantity(@Param("id") long id, @Param("quantity") int quantity);
 	void saveCartItem(CreateCartDto createCartDto);
 	List<CartOverviewDto> findCartOverviewByUserId(long userId);
+	void deleteCartItemById(long id);
 }
