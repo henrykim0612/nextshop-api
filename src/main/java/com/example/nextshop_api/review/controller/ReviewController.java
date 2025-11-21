@@ -21,7 +21,6 @@ public class ReviewController {
 
 	@GetMapping("/admin/review-stats/{productId}")
     public ResponseEntity<List<ReviewStatsDto>> getUser(@PathVariable("productId") long productId) {
-		System.out.println(11111);
         return ResponseEntity.ok(reviewService.getReviewStats(productId));
     }
 }
