@@ -197,22 +197,22 @@ CROSS JOIN (
 
 
 UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'S' AND color = 'BLACK';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'M' AND color = 'WHITE';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'L' AND color = 'BLUE';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'XL' AND color = 'RED';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'XL' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'S' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'S' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'S' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 1 AND size = 'S' AND color = 'GREEN';
 
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'S' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'M' AND color = 'WHITE';
 UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'M' AND color = 'BLUE';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'L' AND color = 'BLACK';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'XL' AND color = 'GREEN';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'XL' AND color = 'RED';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'M' AND color = 'BLACK';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'M' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 2 AND size = 'M' AND color = 'RED';
 
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'S' AND color = 'GREEN';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'M' AND color = 'BLUE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'L' AND color = 'GREEN';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'L' AND color = 'BLUE';
 UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'L' AND color = 'RED';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'XL' AND color = 'WHITE';
-UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'XL' AND color = 'BLACK';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'L' AND color = 'WHITE';
+UPDATE product_sizes SET quantity = 0 WHERE product_id = 3 AND size = 'L' AND color = 'BLACK';
 
 UPDATE product_sizes SET quantity = 0 WHERE product_id = 4 AND size = 'S' AND color = 'RED';
 UPDATE product_sizes SET quantity = 0 WHERE product_id = 4 AND size = 'M' AND color = 'BLACK';
